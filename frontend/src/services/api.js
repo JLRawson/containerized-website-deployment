@@ -1,9 +1,9 @@
-const API_URL = 'http://localhost:2999/api/users'; // Replace with your actual API URL
+const API_URL = 'http://localhost:2999/api';
 
 // Fetch all users
 export const getUsers = async () => {
     try {
-        const response = await fetch(API_URL);
+        const response = await fetch(API_URL + '/allusers');
         if (!response.ok) {
             throw new Error(`Error: ${response.status}`);
         }
@@ -17,7 +17,7 @@ export const getUsers = async () => {
 // Fetch a single user by username
 export const getUserByUsername = async (username) => {
     try {
-        const response = await fetch(`${API_URL}/${username}`);
+        const response = await fetch(`${API_URL}/users/${username}`);
         if (!response.ok) {
             throw new Error(`Error: ${response.status}`);
         }
@@ -31,7 +31,7 @@ export const getUserByUsername = async (username) => {
 // Create a new user
 export const createUser = async (userData) => {
     try {
-        const response = await fetch(API_URL, {
+        const response = await fetch(API_URL + '/users', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData)
@@ -49,7 +49,7 @@ export const createUser = async (userData) => {
 // Update an existing user
 export const updateUser = async (username, userData) => {
     try {
-        const response = await fetch(`${API_URL}/${username}`, {
+        const response = await fetch(`${API_URL}/users/${username}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData)
@@ -67,7 +67,7 @@ export const updateUser = async (username, userData) => {
 // Delete a user
 export const deleteUser = async (username) => {
     try {
-        const response = await fetch(`${API_URL}/${username}`, {
+        const response = await fetch(`${API_URL}/users/${username}`, {
             method: 'DELETE',
         });
         if (!response.ok) {
