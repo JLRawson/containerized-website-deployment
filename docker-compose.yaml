@@ -26,6 +26,28 @@ services:
     networks:
       - mongo-network
 
+  backend: # Name of your backend service
+    build: ./backend # Path to your backend's Dockerfile
+    restart: always
+    ports:
+      - "2999:2999" 
+    environment:
+      DB_URI: mongodb://admin:password@mongo:27017/prod # Adjust database URI
+    depends_on:
+      - mongo
+    networks:
+      - mongo-network
+
+  frontend: # Name of your backend service
+    build: ./frontend # Path to your backend's Dockerfile
+    restart: always
+    ports:
+      - "3000:3000" 
+    depends_on:
+      - backend
+    networks:
+      - mongo-network
+
 volumes:
   mongo-data:
     driver: local

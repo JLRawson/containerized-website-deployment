@@ -1,6 +1,6 @@
 # list-website
 
-Start Running:
+Start Running Locally:
 1. Open Docker
 2. docker-compose -f docker-compose.yaml up
 3. Run front and backend
@@ -9,7 +9,14 @@ Start Running:
 
 Visitng Mongo Express: http://localhost:8081/
 
+Start Running Container:
+1. Open Docker
+2. docker-compose -f docker-compose.yaml up
+3. Run backend
+    docker build -t backend .
+    docker run -p 2999:2999 --name backend -d backend
 
+Debugging: docker logs backend
 
 
 curl -X POST http://localhost:2999/api/users \
