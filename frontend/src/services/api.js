@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:2999/api';
+const API_URL = process.env.BACKEND_API_URL;
 
 // Fetch all users
 export const getUsers = async () => {
@@ -76,6 +76,34 @@ export const deleteUser = async (username) => {
         return response;
     } catch (error) {
         console.error("Error deleting user:", error);
+        throw error;
+    }
+};
+
+export const loginUser = async (loginCredentials) => {
+    try {
+        const response = await fetch(`${API_URL}/login`, {
+            method: 'POST', // Specify the method
+            headers: {
+                'Content-Type': 'application/json', // Specify the content type
+            },
+            body: JSON.stringify(loginCredentials) // Stringify the loginCredentials object
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+
+        const data = await response.json(); // Parse the response as JSON
+
+        // Assuming the token is part of the response data
+        if (data.token) {
+            localStorage.setItem('userToken', data.token);
+        }
+
+        return data;
+    } catch (error) {
+        console.error("Error during login:", error);
         throw error;
     }
 };

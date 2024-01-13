@@ -53,7 +53,25 @@ const userController = {
         } catch (error) {
             res.status(500).send(error);
         }
+    },
+
+    loginUser: async (req, res) => {
+        try {
+            const { username, password } = req.body; // Data is now coming from req.body
+    
+            const user = await UserModel.findOne({ username, password });
+    
+            if (user) {
+                res.status(200).json({ message: "Login successful", user });
+            } else {
+                res.status(401).json({ message: "Login failed" });
+            }
+        } catch (error) {
+            res.status(500).send(error);
+        }
     }
+    
+    
     
 };
 

@@ -17,3 +17,10 @@ curl -X POST http://localhost:2999/api/users \
 -d '{"username": "newuser", "message": "Wewewww", "password": "test"}'
 
 curl -X GET http://localhost:2999/api/user/{username}
+
+
+curl -X GET http://localhost:2999/api/login \
+-H "Content-Type: application/json" \
+-d '{"username": "my", "password": "first"}'
+
+curl -X POST http://localhost:2999/api/login -H "Content-Type: application/json" -d '{"username": "1", "password": "2"}'
