@@ -32,14 +32,14 @@ services:
     ports:
       - "2999:2999" 
     environment:
-      DB_URI: mongodb://admin:password@mongo:27017/prod # Adjust database URI
+      DB_URI: mongodb://admin:password@mongo:27017/prod
     depends_on:
       - mongo
     networks:
       - mongo-network
 
-  frontend: # Name of your backend service
-    build: ./frontend # Path to your backend's Dockerfile
+  frontend:
+    build: ./frontend 
     restart: always
     ports:
       - "3000:3000" 
