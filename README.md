@@ -22,7 +22,7 @@ Start to Finish - K8s
     (open/start docker) 
     minikube start
 3. Create images of backend and frontend
-    eval $(minikubr docker-env)
+    eval $(minikube docker-env)
     cd [frontend/backend]
     docker build -t [frontend/backend] .
     cd ..
@@ -34,7 +34,7 @@ Start to Finish - K8s
     kubectl apply -f frontend.yaml
 5. Check on cluster, make sure each pod is ready
     kubectl get pods
-6. Access frontend
+6. Access frontend (make sure you aren't using a VPN)
     minikube service frontend --url
 7. Delete entire cluster (even others that may be running)
     kubectl delete all --all -n default
@@ -60,7 +60,7 @@ Note: API URls have to be changed from localhost to mongo
 
 Debugging: docker logs backend
 
-Visitng Mongo Express: http://localhost:8081/
+Visitng Mongo Express Locally: http://localhost:8081/
 
 Starting Running Kubernetes:
 1. minikube start --driver=docker

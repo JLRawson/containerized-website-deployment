@@ -31,9 +31,12 @@ kind: Service
 metadata:
   name: backend
 spec:
+  type: NodePort
   ports:
     - name: "2999"
       port: 2999
       targetPort: 2999
+      nodePort: 30002
   selector:
     service: backend
+
