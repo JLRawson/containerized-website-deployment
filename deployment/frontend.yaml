@@ -29,8 +29,10 @@ metadata:
   name: frontend
 spec:
   type: NodePort
+  selector:
+    service: frontend
   ports:
   - name: "http"
     port: 80 
     targetPort: 3000
-    nodePort: 31000 
+    nodePort: 31000
