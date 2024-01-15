@@ -28,7 +28,7 @@ Start a Set of Containers:
 
 Debugging: docker logs backend
 
-Building an individual dockerfile: docker build -t [fronten/backend] .
+Building an individual dockerfile: docker build -t [frontend/backend] .
 
 Starting Running Kubernetes:
 1. minikube start --driver=docker
