@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: backend
+  template:
+    metadata:
+      labels:
+        service: backend
+    spec:
+      containers:
+        - env:
+            - name: DB_URI
+              value: mongodb://admin:password@mongo:27017/prod
+          image: backend
+          name: backend
+          ports:
+            - containerPort: 2999
+              protocol: TCP
+          imagePullPolicy: Never
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  ports:
+    - name: "2999"
+      port: 2999
+      targetPort: 2999
+  selector:
+    service: backend

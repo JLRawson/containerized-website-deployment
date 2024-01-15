@@ -26,8 +26,8 @@ services:
     networks:
       - mongo-network
 
-  backend: # Name of your backend service
-    build: ./backend # Path to your backend's Dockerfile
+  backend:
+    build: ./backend 
     restart: always
     ports:
       - "2999:2999" 
