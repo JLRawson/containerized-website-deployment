@@ -83,18 +83,18 @@ export const deleteUser = async (username) => {
 export const loginUser = async (loginCredentials) => {
     try {
         const response = await fetch(`${API_URL}/login`, {
-            method: 'POST', // Specify the method
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/json', // Specify the content type
+                'Content-Type': 'application/json', 
             },
-            body: JSON.stringify(loginCredentials) // Stringify the loginCredentials object
+            body: JSON.stringify(loginCredentials)
         });
 
         if (!response.ok) {
             throw new Error(`Error: ${response.status}`);
         }
 
-        const data = await response.json(); // Parse the response as JSON
+        const data = await response.json();
 
         // Assuming the token is part of the response data
         if (data.token) {

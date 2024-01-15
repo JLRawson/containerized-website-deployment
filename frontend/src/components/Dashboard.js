@@ -7,7 +7,7 @@ const Dashboard = () => {
     const [newUser, setNewUser] = useState({ username: '', password: '', message: '' });
     const [loginCredentials, setLoginCredentials] = useState({ username: '', password: '' });
     // const history = useHistory();
-    const [loginMessage, setLoginMessage] = useState(''); // State to hold the login message
+    const [loginMessage, setLoginMessage] = useState('');
 
 
     useEffect(() => {
@@ -47,7 +47,6 @@ const Dashboard = () => {
         event.preventDefault();
         try {
             const response = await loginUser(loginCredentials);
-            // Handle login success
             setLoginMessage('Login successful!');
             // history.push('/'); // Step 3 - Redirect to homepage
         } catch (error) {

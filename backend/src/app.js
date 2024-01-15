@@ -2,25 +2,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const userRoutes = require('./routes/userRoutes'); // Import user routes
+const userRoutes = require('./routes/userRoutes');
 require('dotenv').config();
 const dbConnection = process.env.MONGO_API_URL;
-
-
 const app = express();
-
-// Middleware to parse JSON bodies
 app.use(express.json());
-
-// Middleware for CORS (Cross-Origin Resource Sharing)
 app.use(cors());
 
-// Database connection
-mongoose.connect(dbConnection) //mongodb://admin:password@mongo:27017/  when switching to docker
+mongoose.connect(dbConnection) 
   .then(() => console.log('MongoDB connected...'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Use user routes
 app.use('/api', userRoutes);
 
 // Handle undefined routes with a 404 middleware
