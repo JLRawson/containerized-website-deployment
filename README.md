@@ -50,8 +50,8 @@ Running Half-Local and Half-Containers:
 1. Open Docker
 2. docker-compose -f partial-docker-compose.yaml up
 3. Run front and backend
-    cd [frontend/backend]
-    npm start
+    - cd [frontend/backend]
+    - npm start
 Note: API URls have to be changed from mongo to localhost
 
 Running All-Containers:
