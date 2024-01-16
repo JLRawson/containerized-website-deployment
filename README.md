@@ -52,6 +52,7 @@ Running Half-Local and Half-Containers:
 3. Run front and backend
     - cd [frontend/backend]
     - npm start
+
 Note: API URls have to be changed from mongo to localhost
 
 Running All-Containers:
