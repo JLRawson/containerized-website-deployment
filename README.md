@@ -19,9 +19,9 @@ Pre-Req Downloaded
 
 Start to Finish - K8s
 1. Set up node modules
-    cd [frontend/backend]
-    npm install
-    cd ..
+    - cd [frontend/backend]
+    - npm install
+    - cd ..
 2. Start cluster
     (open/start docker) 
     minikube start
