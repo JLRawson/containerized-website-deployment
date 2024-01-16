@@ -7,7 +7,13 @@ require('dotenv').config();
 const dbConnection = process.env.MONGO_API_URL;
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+const corsOptions = { // allow requests from the frontend
+  origin: 'http://127.0.0.1:58927', 
+  optionsSuccessStatus: 200 
+};
+
+app.use(cors(corsOptions));
 
 mongoose.connect(dbConnection) 
   .then(() => console.log('MongoDB connected...'))

@@ -25,22 +25,48 @@ Start to Finish - K8s
 2. Start cluster
     - (open/start docker) 
     - minikube start
-3. Create images of backend and frontend
+3. Enable ingress for local routing
+    - minikube addons enable ingress
+4. Create images of backend and frontend
     - eval $(minikube docker-env)
     - cd [frontend/backend]
     - docker build -t [frontend/backend] .
     - cd ..
-4. Apply to cluster
+5. Apply to cluster
     - cd deployment
     - kubectl apply -f mongo.yaml
     - kubectl apply -f mongo-express.yaml
     - kubectl apply -f backend.yaml
     - kubectl apply -f frontend.yaml
-5. Check on cluster, make sure each pod is ready
+6. Check on cluster, make sure each pod is ready
     - kubectl get pods
-6. Access frontend (make sure you aren't using a VPN)
+7. Access frontend (make sure you aren't using a VPN)
     - minikube service frontend --url
-7. Delete entire cluster (even others that may be running)
+8. Non-longterm fix for CORS policy blockage
+    - (copy http given from previous command and paste in Cors Option in backend/src/app.js, then save)
+    - (open new terminal)
+    - eval $(minikube docker-env)
+    - cd backend
+    - docker build -t backend .
+    - kubectl rollout restart deployment backend
+    - kubectl rollout restart deployment backend
+    - docker images
+    - docker rmi [idOfPreviousBackendImage]
+    - kubectl rollout restart deployment backend
+    - (reload frontend)
+9. Set up Database
+    - minikube service mongo-express --url
+    - (view prod -> view user -> new document)
+    - {
+        "_id": ObjectId(),
+    	"username": "admin",
+    	"password": "password",
+    	"message": "test"
+        }
+    - (save)
+    - (reload frontend)
+10. Test Frontend
+11. Delete entire cluster (don't do if you have others listed)
     - kubectl delete all --all -n default
 
 
@@ -79,6 +105,11 @@ Starting Running Kubernetes:
 4. minikube service frontend --url
 5. kubectl delete all --all -n default
 
+Restarting If You Update an Image: kubectl rollout restart deployment [frontend/backed]
+
+Ingress Doc: https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
+
+
 # Misc. Local Backend Tests
 
 curl -X POST http://localhost:2999/api/users \
@@ -92,3 +123,10 @@ curl -X GET http://localhost:2999/api/login \
 -d '{"username": "my", "password": "first"}'
 
 curl -X POST http://localhost:2999/api/login -H "Content-Type: application/json" -d '{"username": "1", "password": "2"}'
+
+# Misc. Copy and Pastes for my sanity
+
+kubectl apply -f mongo.yaml
+kubectl apply -f mongo-express.yaml
+kubectl apply -f backend.yaml
+kubectl apply -f frontend.yaml
