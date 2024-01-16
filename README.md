@@ -23,25 +23,25 @@ Start to Finish - K8s
     - npm install
     - cd ..
 2. Start cluster
-    (open/start docker) 
-    minikube start
+    - (open/start docker) 
+    - minikube start
 3. Create images of backend and frontend
-    eval $(minikube docker-env)
-    cd [frontend/backend]
-    docker build -t [frontend/backend] .
-    cd ..
+    - eval $(minikube docker-env)
+    - cd [frontend/backend]
+    - docker build -t [frontend/backend] .
+    - cd ..
 4. Apply to cluster
-    cd deployment
-    kubectl apply -f mongo.yaml
-    kubectl apply -f mongo-express.yaml
-    kubectl apply -f backend.yaml
-    kubectl apply -f frontend.yaml
+    - cd deployment
+    - kubectl apply -f mongo.yaml
+    - kubectl apply -f mongo-express.yaml
+    - kubectl apply -f backend.yaml
+    - kubectl apply -f frontend.yaml
 5. Check on cluster, make sure each pod is ready
-    kubectl get pods
+    - kubectl get pods
 6. Access frontend (make sure you aren't using a VPN)
-    minikube service frontend --url
+    - minikube service frontend --url
 7. Delete entire cluster (even others that may be running)
-    kubectl delete all --all -n default
+    - kubectl delete all --all -n default
 
 
 # Misc. Commands to Run Sections
@@ -58,33 +58,32 @@ Running All-Containers:
 1. Open Docker
 2. docker-compose -f docker-compose.yaml up
 3. Run backend
-    docker build -t [frontend/backend] .
-    docker run -p [3000:3000/2999:2999] --name [frontend/backend] -d [frontend/backend]
-Note: API URls have to be changed from localhost to mongo
+    - docker build -t [frontend/backend] .
+    - docker run -p [3000:3000/2999:2999] --name [frontend/backend] -d [frontend/backend]
+Note: API URLs have to be changed from localhost to Mongo
 
 Debugging: docker logs backend
 
-Visitng Mongo Express Locally: http://localhost:8081/
+Visiting Mongo Express Locally: http://localhost:8081/
 
 Starting Running Kubernetes:
 1. minikube start --driver=docker
 2. eval $(minikube docker-env)
 3.  Start Cluster
-    kubectl apply -f mongo.yaml
-    kubectl apply -f mongo-express.yaml
-    kubectl apply -f backend.yaml
-    kubectl apply -f frontend.yaml
+    - kubectl apply -f mongo.yaml
+    - kubectl apply -f mongo-express.yaml
+    - kubectl apply -f backend.yaml
+    - kubectl apply -f frontend.yaml
 4. minikube service frontend --url
 5. kubectl delete all --all -n default
 
-# Misc. Backend Tests
+# Misc. Local Backend Tests
 
 curl -X POST http://localhost:2999/api/users \
 -H "Content-Type: application/json" \
 -d '{"username": "newuser", "message": "Wewewww", "password": "test"}'
 
 curl -X GET http://localhost:2999/api/user/{username}
-
 
 curl -X GET http://localhost:2999/api/login \
 -H "Content-Type: application/json" \
