@@ -1,4 +1,4 @@
-# Containerized Wbsite Deployment
+# Containerized Website Deployment
 
 ### Description
 
